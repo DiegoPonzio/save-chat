@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import {connectSocket} from "../socket.js";
+import { useEffect, useState } from "react";
+import { connectSocket } from "../socket.js";
 import EmojiPicker from "emoji-picker-react";
-import {Sidebar} from "./Sidebar.jsx";
-import {Typing} from "./Typing.jsx";
+import { Sidebar } from "./Sidebar.jsx";
+import { Typing } from "./Typing.jsx";
 import toast from "react-hot-toast";
 
 export const Chat = ({ username }) => {
@@ -70,10 +70,12 @@ export const Chat = ({ username }) => {
             return;
         }
 
-        socket.send(JSON.stringify({
-            type: "message",
-            data: text
-        }));
+        socket.send(
+            JSON.stringify({
+                type: "message",
+                data: text,
+            }),
+        );
 
         setText("");
         toast.success("Mensaje enviado");
@@ -82,9 +84,11 @@ export const Chat = ({ username }) => {
     const handleTyping = (e) => {
         setText(e.target.value);
 
-        socket.send(JSON.stringify({
-            type: "typing"
-        }));
+        socket.send(
+            JSON.stringify({
+                type: "typing",
+            }),
+        );
     };
 
     return (
@@ -117,12 +121,10 @@ export const Chat = ({ username }) => {
 
                 {showEmoji && (
                     <EmojiPicker
-                        onEmojiClick={(e) =>
-                            setText((prev) => prev + e.emoji)
-                        }
+                        onEmojiClick={(e) => setText((prev) => prev + e.emoji)}
                     />
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
