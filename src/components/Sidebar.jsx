@@ -7,4 +7,4 @@ export const Sidebar = ({ users }) => {
             ))}
         </div>
     );
-}
+};
